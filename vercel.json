@@ -1,15 +1,19 @@
 {
+    "version": 2,
     "builds": [
-      {
-        "src": "apps/www/package.json",
-        "use": "@vercel/next"
-      }
+        {
+            "src": "www/package.json",
+            "use": "@vercel/next"
+        }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "apps/www/$1"
-      }
+        {
+            "src": "/(dashboard|auth|docs|marketing|onboarding|property)(.*)",
+            "dest": "/www/src/app/$1$2"
+        },
+        {
+            "src": "/",
+            "dest": "/www/src/app/dashboard/page.tsx"
+        }
     ]
-  }
-  
+}
