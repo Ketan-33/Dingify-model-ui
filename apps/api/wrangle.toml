@@ -1,0 +1,28 @@
+
+name = "api"
+compatibility_date = "2023-12-28"
+main = "src/index.ts"
+
+[dev]
+port = 4200
+
+[vars]
+MY_VAR = "my-variable"
+
+DATABASE_URL = { env = "DATABASE_URL" }
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
