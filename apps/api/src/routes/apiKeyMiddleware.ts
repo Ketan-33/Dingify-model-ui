@@ -22,9 +22,7 @@ export async function apiKeyMiddleware(
   // c.set("user", user);
   // return next();
 
-  import { Context } from "hono";
-import { prisma } from "../lib/db";
-import { Env } from "../env";
+
 
 export async function apiKeyMiddleware(
   c: Context<{

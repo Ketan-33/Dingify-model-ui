@@ -9,7 +9,7 @@ export type Event = {
   userId: string;
   icon: string;
   notify: boolean;
-  tags: Record<string, unknown>;
+  tags: Record<any, any>;
   createdAt: string;
 };
 
