@@ -1,0 +1,24 @@
+name = "api"
+compatibility_date = "2023-12-28"
+main = "src/index.ts"
+
+[vars]
+MY_VAR = "my-variable"
+DATABASE_URL="postgresql://dingify_owner:EMQFwS0P9zXO@ep-bold-smoke-a1kwj9w1.ap-southeast-1.aws.neon.tech/dingify?sslmode=require"
+
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
