@@ -4,7 +4,7 @@
   "private": true,
   "author": "Christer (https://twitter.com/Codehagen)",
   "scripts": {
-    "build": "turbo build --output public",
+    "build": "turbo build ",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
     "db:generate": "pnpm -F db db:generate",
