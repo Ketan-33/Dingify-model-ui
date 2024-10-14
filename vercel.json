@@ -1,0 +1,32 @@
+{
+    "version": 2,
+    "projects": {
+      "www": {
+        "src": "apps/www",
+        "buildCommand": "turbo run build --filter=www...",
+        "outputDirectory": "apps/www/.next"
+      },
+      "api": {
+        "src": "apps/api",
+        "buildCommand": "turbo run build --filter=api...",
+        "outputDirectory": "dist"
+      }
+    },
+    "builds": [
+      {
+        "src": "apps/www/package.json",
+        "use": "@vercel/next"
+      },
+      {
+        "src": "apps/api/index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "apps/api/index.js"
+      }
+    ]
+  }
+  
