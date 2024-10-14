@@ -1,17 +1,5 @@
 {
     "version": 2,
-    "projects": {
-      "www": {
-        "src": "apps/www",
-        "buildCommand": "turbo run build --filter=www...",
-        "outputDirectory": "apps/www/.next"
-      },
-      "api": {
-        "src": "apps/api",
-        "buildCommand": "turbo run build --filter=api...",
-        "outputDirectory": "dist"
-      }
-    },
     "builds": [
       {
         "src": "apps/www/package.json",
