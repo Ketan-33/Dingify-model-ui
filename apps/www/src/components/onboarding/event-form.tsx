@@ -66,7 +66,7 @@ export function EventForm({ apiKey, channelName }: EventFormProp) {
   const [isPending, startTransition] = useTransition();
 
   const curlCommand = `
-  curl -X POST https://api.dingify.workers.dev/api/events \\
+  curl -X POST https://api.hellofr.workers.dev/api/events \\
   -H "Content-Type: application/json" \\
   -H "x-api-key: ${apiKey}" \\
   -d '{
