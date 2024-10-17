@@ -21,6 +21,7 @@ export async function apiKeyMiddleware(
   // Store user in context for downstream use
   c.set("user", user);
   return next();
+<<<<<<< HEAD
 
 
 
@@ -45,4 +46,6 @@ export async function apiKeyMiddleware(
 //   return next();
 // }
 
+=======
+>>>>>>> 9822bb1f43b74e604601be4f6882c3a5a21ffd59
 }
