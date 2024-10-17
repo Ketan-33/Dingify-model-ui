@@ -47,6 +47,4 @@ next-env.d.ts
 .vscode
 .contentlayer
 
-#API
-.wrangler.toml
-wrangler.toml
+

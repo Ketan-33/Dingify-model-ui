@@ -4,8 +4,9 @@
   "private": true,
   "author": "Christer (https://twitter.com/Codehagen)",
   "scripts": {
-    "build": "turbo build",
+    "build": "turbo build ",
     "clean": "git clean -xdf node_modules",
+    "deploy": "wrangler publish",
     "clean:workspaces": "turbo clean",
     "db:generate": "pnpm -F db db:generate",
     "db:migrate:dev": "pnpm -F db db:migrate:dev",
