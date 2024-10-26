@@ -98,6 +98,7 @@ model Channel {
   id        String   @id @default(cuid())
   name      String
   providerType String
+  url String
   projectId String
   project   Project  @relation(fields: [projectId], references: [id])
   events    Event[]

@@ -21,6 +21,7 @@ import { Label } from "@dingify/ui/components/label";
 export function AddChannelButton() {
   const [channelName, setChannelName] = useState("");
   const [providerType, setProviderType] = useState("");
+  const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -29,7 +30,7 @@ export function AddChannelButton() {
     setIsLoading(true);
 
     try {
-      const result = await createChannel(channelName,providerType);
+      const result = await createChannel(channelName,providerType,url);
 
       if (!result.success) {
         throw new Error(result.error || "Failed to add channel");
@@ -111,7 +112,7 @@ export function AddChannelButton() {
           </DialogHeader>
           <div className="grid gap-4 pt-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="channelName" className="col-span-1 text-right">
+              <Label htmlFor="channelName" className="col-span-1 text-center">
                 Provider Name
               </Label>
               <Input
@@ -127,7 +128,7 @@ export function AddChannelButton() {
             </div>
 
             <div className="grid grid-cols-4 items-center gap-4">
-              <label htmlFor="ProviderType" className="col-span-1 text-right">
+              <label htmlFor="ProviderType" className="col-span-1 text-center">
                 Provider Type
               </label>
               <select
@@ -142,6 +143,22 @@ export function AddChannelButton() {
                 <option value="Ollama">Ollama</option>
                 <option value="LLM">LLM</option>
               </select>
+            </div>
+
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="url" className="col-span-1 text-center">
+                Url
+              </Label>
+              <Input
+                id="url"
+                name="url"
+                placeholder="Url"
+                className="col-span-3"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                required
+                disabled={isLoading}
+              />
             </div>
           </div>
           <DialogFooter>

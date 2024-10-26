@@ -13,10 +13,12 @@ type NotificationDetails = {
   name: string;
 };
 
-export const callOllama = async (req) => {
+// "http://4.240.106.246:11434/v1/chat/completions"
+
+export const callOllama = async (req,url) => {
   try {
-    const res = await fetch("http://4.240.106.246:11434/v1/chat/completions", {
-      method: "POST",
+    const res = await fetch(url+`/v1/chat/completions`, {
+      method: "POST", 
       headers: {
         "Content-Type": "application/json",
       },
@@ -72,12 +74,14 @@ export async function createEvent(data) {
       projectId_name: {
         projectId: project.id,
         name: channel,
+        
       },
     },
     update: {},
     create: {
       name: channel,
       projectId: project.id,
+      
     },
   });
 

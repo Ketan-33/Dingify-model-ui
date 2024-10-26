@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 
-export async function createChannel(channelName: string,providerType:string) {
+export async function createChannel(channelName: string,providerType:string,url:string) {
   const user = await getCurrentUser();
   const userId = user?.id;
   console
@@ -31,6 +31,7 @@ export async function createChannel(channelName: string,providerType:string) {
       data: {
         name: channelName,
         providerType: providerType,
+        url: url,
         projectId: projects[0]!.id, // associate with the first project
       },
     });

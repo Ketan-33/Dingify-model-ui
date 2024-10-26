@@ -33,6 +33,7 @@ export async function getUserChannels() {
     select: {
       id: true,
       name: true,
+      url:true,
     },
   });
 

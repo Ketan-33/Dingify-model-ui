@@ -55,7 +55,7 @@ export function DashboardNav({ items, slug }: DashboardNavProps) {
                     "cursor-default px-3 py-2",
                   )}
                 >
-                  Your Channels
+                  Your Providers
                 </div>
               </>
             )}
