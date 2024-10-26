@@ -44,7 +44,7 @@ export const callOllama = async (req,url) => {
 export async function createEvent(data) {
   
   const { channel, name, user_id, icon, notify,tags } = data;
-  const res = await callOllama(tags.content);
+  const res= await callOllama(tags.content,tags.url);
   tags.res=res;
   const currentUser = await getCurrentUser();
   // console.log(currentUser)
@@ -81,6 +81,8 @@ export async function createEvent(data) {
     create: {
       name: channel,
       projectId: project.id,
+      providerType:tags.providerType,
+      url:tags.url,
       
     },
   });

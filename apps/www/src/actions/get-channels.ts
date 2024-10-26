@@ -34,6 +34,7 @@ export async function getUserChannels() {
       id: true,
       name: true,
       url:true,
+      providerType:true,
     },
   });
 

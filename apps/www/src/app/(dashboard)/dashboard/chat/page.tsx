@@ -11,12 +11,14 @@ const Page = () => {
   const [inputValue, setInputValue] = useState('');
   const [resValue, setResValue] = useState('');
   const [url, setUrl] = useState('');
+  const [providerType, setProviderType] = useState('');
   const [loading, setLoading] = useState(false);
 
   interface Channel {
     id: string;
     name: string;
     url:string;
+    providerType:string;
   }
 
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -42,6 +44,8 @@ const Page = () => {
     const channel = channels.find((channel) => channel.name === selectedName);
     if (channel) {
       setUrl(channel.url); 
+      setProviderType(channel.providerType)
+
     } else {
       setUrl(""); 
     }
@@ -57,10 +61,12 @@ const Page = () => {
     user_id: "user1",
     icon: "🤩",
     notify: true,
+
     tags: {
       content: "",
       res: "",
-
+      url:"",
+      providerType:""
     }
   };
 
@@ -72,11 +78,13 @@ const Page = () => {
     console.log("Calling Ollama ");
 
     eventData.tags.content = inputValue;
-    eventData.channel = inputValue;
+    eventData.channel = selectedChannel;
     setLoading(true);
 
     const res = await callOllama(inputValue,url);
     eventData.tags.res = res;
+    eventData.tags.url = url;
+    eventData.tags.providerType = providerType;
     console.log("Generated response: ", res);
     setResValue(res);
     setInputValue('');
