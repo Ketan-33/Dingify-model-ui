@@ -6,10 +6,10 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 
-export async function createChannel(channelName: string) {
+export async function createChannel(channelName: string,providerType:string) {
   const user = await getCurrentUser();
   const userId = user?.id;
-
+  console
   if (!userId) {
     console.error("No user is currently logged in.");
     return { success: false, error: "User not authenticated" };
@@ -30,6 +30,7 @@ export async function createChannel(channelName: string) {
     const newChannel = await prisma.channel.create({
       data: {
         name: channelName,
+        providerType: providerType,
         projectId: projects[0]!.id, // associate with the first project
       },
     });
