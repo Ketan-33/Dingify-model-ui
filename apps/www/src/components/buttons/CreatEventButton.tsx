@@ -86,7 +86,9 @@ export function CreateEventButton() {
       notify: true,
       tags: {
         content: "Code for bubble sort in python",
-        res:""
+        res:"",
+        url: "http://4.240.106.246:11434",
+        providerType: "Ollama"
       }
     };
 
