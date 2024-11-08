@@ -102,7 +102,7 @@ export default function EventsDashboardDetails({ event }) {
                 <span>{event?.name}</span>
               </li>
               <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">Channel</span>
+                <span className="text-muted-foreground">Model</span>
                 <span>
                   <Badge className="text-xs" variant="default">
                     {event?.channel ? event?.channel.name : "No Channel"}
@@ -121,7 +121,7 @@ export default function EventsDashboardDetails({ event }) {
               </li>
             </ul>
             <Separator className="my-2" />
-            <ul className="grid gap-3">
+            {/* <ul className="grid gap-3">
               <li className="flex items-center justify-between">
                 <span className="text-muted-foreground">User</span>
                 <span>
@@ -149,11 +149,11 @@ export default function EventsDashboardDetails({ event }) {
                   </Badge>
                 </span>
               </li>
-            </ul>
+            </ul> */}
           </div>
-          <Separator className="my-4" />
+          {/* <Separator className="my-4" /> */}
           <div className="grid gap-3">
-            <div className="font-semibold">Meta Tags</div>
+            <div className="font-semibold">User Interaction</div>
             <dl className="grid gap-3">
               <div className="flex items-center justify-between">
                 <dt className="text-muted-foreground">Plan</dt>
