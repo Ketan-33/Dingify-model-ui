@@ -28,8 +28,11 @@ export async function createProjectAndChannel(projectName) {
     // Create a new channel with a default name within the new project
     const newChannel = await prisma.channel.create({
       data: {
-        name: "new-channel-name",
+        name: "Provider1",
         projectId: newProject.id,
+        providerType:"Ollama",
+        url:"http://4.240.106.246:11434",
+        
       },
     });
     console.log(
