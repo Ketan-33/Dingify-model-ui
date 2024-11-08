@@ -32,6 +32,7 @@ export async function createProjectAndChannel(projectName) {
         projectId: newProject.id,
         providerType:"Ollama",
         url:"http://4.240.106.246:11434",
+        
       },
     });
     console.log(
