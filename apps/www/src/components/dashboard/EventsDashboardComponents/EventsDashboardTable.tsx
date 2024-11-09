@@ -87,8 +87,8 @@ export default function EventsDashboardTable({
               <Table>
                 <TableHeader>
                   <TableRow>
-                  <TableHead className="hidden sm:table-cell">Timestamp</TableHead>
-                  <TableHead className="hidden sm:table-cell">Model</TableHead>
+                    <TableHead className="hidden sm:table-cell">Timestamp</TableHead>
+                    <TableHead className="hidden sm:table-cell">Provider</TableHead>
                     <TableHead className="hidden sm:table-cell">Providertype</TableHead>
                     <TableHead className="hidden sm:table-cell">UserID</TableHead>
                     <TableHead className="hidden sm:table-cell">Request</TableHead>
@@ -109,15 +109,15 @@ export default function EventsDashboardTable({
                         <div>
                           <div>{new Date(event.createdAt).toLocaleDateString()}</div>
                           <div>{new Date(event.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</div>
-                          </div>
-                          </TableCell>
+                        </div>
+                      </TableCell>
 
                       <TableCell>
                         {event.channel && event.channel.name && (
                           <div className="font-medium">
                             {event.channel.name}
                           </div>
-                        )}  
+                        )}
                         {/* {event.channel &&
                           event.channel.project &&
                           event.channel.project.name && (
@@ -130,8 +130,8 @@ export default function EventsDashboardTable({
                       <TableCell className="hidden sm:table-cell">
                         <div title={event.tags.providerType}>
                           {event.tags.providerType}
-                          </div>
-                          </TableCell>
+                        </div>
+                      </TableCell>
                       <TableCell className="hidden sm:table-cell">
                         <UserBadge
                           customerId={event.customerId}
@@ -142,14 +142,27 @@ export default function EventsDashboardTable({
                       </TableCell>
                       <TableCell className="hidden sm:table-cell">
                         <div title={event.tags.content || ''}>
-                          {event.tags.content && event.tags.content.length > 10? `${event.tags.content.slice(0, 5)}...${event.tags.content.slice(-5)}`: event.tags.content || 'N/A'}
-                          </div>
-                          </TableCell>
+                          {event.tags.content && event.tags.content.length > 10 ? `${event.tags.content.slice(0, 5)}...${event.tags.content.slice(-5)}` : event.tags.content || 'N/A'}
+                        </div>
+                      </TableCell>
                       <TableCell className="hidden sm:table-cell">
-                        <div title={event.tags.res || ''}>
-                          {event.tags.res && event.tags.res.length > 10 ? `${event.tags.res.slice(0, 5)}...${event.tags.res.slice(-5)}`: 'N/A'}
-                          </div>
-                          </TableCell>
+                        <div title={event.tags.reqRes ? JSON.stringify(event.tags.reqRes) : ''}>
+                          {event.tags.reqRes &&
+                            event.tags.reqRes.res &&
+                            event.tags.reqRes.res.choices &&
+                            event.tags.reqRes.res.choices[0] &&
+                            event.tags.reqRes.res.choices[0].message &&
+                            event.tags.reqRes.res.choices[0].message.content
+                            ? (
+                              event.tags.reqRes.res.choices[0].message.content.length > 10
+                                ? `${event.tags.reqRes.res.choices[0].message.content.slice(0, 5)}...${event.tags.reqRes.res.choices[0].message.content.slice(-5)}`
+                                : event.tags.reqRes.res.choices[0].message.content
+                            )
+                            : 'N/A'
+                          }
+                        </div>
+
+                      </TableCell>
 
 
                     </TableRow>

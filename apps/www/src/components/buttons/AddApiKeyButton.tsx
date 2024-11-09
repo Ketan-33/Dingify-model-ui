@@ -69,7 +69,7 @@ export function AddApiKeyButton() {
           Add new API key
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[650px]">
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader>
             <DialogTitle>Create a new API key</DialogTitle>

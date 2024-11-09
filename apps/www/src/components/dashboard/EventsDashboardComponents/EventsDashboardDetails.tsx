@@ -102,7 +102,7 @@ export default function EventsDashboardDetails({ event }) {
                 <span>{event?.name}</span>
               </li>
               <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">Model</span>
+                <span className="text-muted-foreground">Provider</span>
                 <span>
                   <Badge className="text-xs" variant="default">
                     {event?.channel ? event?.channel.name : "No Channel"}
@@ -155,23 +155,24 @@ export default function EventsDashboardDetails({ event }) {
           <div className="grid gap-3">
             <div className="font-semibold">User Interaction</div>
             <dl className="grid gap-3">
-              <div className="flex items-center justify-between">
-                <dt className="text-muted-foreground">Plan</dt>
+              <div className="flex flex-col gap-1">
+                <dt className="text-black  bold">Request</dt>
                 <dd>
-                  <Badge className="text-xs" variant="secondary">
-                    {event?.tags.plan}
-                  </Badge>
+                  <div className="bg-gray-50">
+                    <pre className="text-gray-600 p-6 rounded-sm overflow-auto max-h-[200px] whitespace-pre-wrap break-words">{JSON.stringify(event?.tags.reqRes.reqBody, null, 2)}</pre>
+                  </div>
                 </dd>
               </div>
-              <div className="flex items-center justify-between">
-                <dt className="text-muted-foreground">Cycle</dt>
+              <div className="flex flex-col gap-1">
+                <dt className="text-black bold">Response</dt>
                 <dd>
-                  <Badge className="text-xs" variant="secondary">
-                    {event?.tags.cycle}
-                  </Badge>
+                  <div className="bg-gray-50">
+                    <pre className="text-gray-600 p-6 rounded-sm overflow-auto max-h-[200px] whitespace-pre-wrap break-words">{JSON.stringify(event?.tags.reqRes.res, null, 2)}</pre>
+                  </div>
                 </dd>
               </div>
             </dl>
+
           </div>
         </CardContent>
         <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">

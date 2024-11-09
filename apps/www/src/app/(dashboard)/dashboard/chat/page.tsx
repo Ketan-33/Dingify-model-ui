@@ -109,7 +109,7 @@ const Page = () => {
         className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-gray-500"
       >
         <option value="" disabled>
-          Select Channel
+          Select Provider
         </option>
         {channels.map((channel) => (
           <option key={channel.id} value={channel.name}>
