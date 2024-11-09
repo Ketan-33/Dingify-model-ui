@@ -64,7 +64,7 @@ const Page = () => {
 
     tags: {
       content: "",
-      res: "",
+      reqRes: "",
       url:"",
       providerType:""
     }
@@ -81,12 +81,12 @@ const Page = () => {
     eventData.channel = selectedChannel;
     setLoading(true);
 
-    const res = await callOllama(inputValue,url);
-    eventData.tags.res = res;
+    const result = await callOllama(inputValue,url);
+    eventData.tags.reqRes =  JSON.stringify(result);
     eventData.tags.url = url;
     eventData.tags.providerType = providerType;
-    console.log("Generated response: ", res);
-    setResValue(res);
+    console.log("Generated response: ", result?.res);
+    setResValue(result?.res.choices[0].message.content);
     setInputValue('');
     setLoading(false);
 

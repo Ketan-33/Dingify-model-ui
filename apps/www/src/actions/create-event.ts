@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 import { sendDiscordNotification, sendSlackNotification } from "@/lib/utils";
-import { log } from "console";
+
 
 type NotificationDetails = {
   webhook: string;
@@ -17,27 +17,34 @@ type NotificationDetails = {
 
 export const callOllama = async (req,url) => {
   try {
+
+    const reqBody=
+      {
+        "model": "llama3.1",
+        "messages": [
+            {
+                "role": "user",
+                "content": req
+            }
+        ]
+    }
+    
+
     const res = await fetch(url+`/v1/chat/completions`, {
       method: "POST", 
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: "llama3.1",
-        messages: [
-          {
-            role: "user",
-            content: req,
-          },
-        ],
-      }),
+      body: JSON.stringify(reqBody),
     });
     const data = await res.json();
     // console.log("Response Body:", data);
     console.log("Response:", data.choices[0].message.content);
-    return (data.choices[0].message.content);
+    // return (data.choices[0].message.content);
+    return {res:data,reqBody};
   } catch (err) {
     console.log(err);
+    return undefined;
   }
 };
 
@@ -45,7 +52,7 @@ export async function createEvent(data) {
   
   const { channel, name, user_id, icon, notify,tags } = data;
   const res= await callOllama(tags.content,tags.url);
-  tags.res=res;
+  tags.reqRes=res;
   const currentUser = await getCurrentUser();
   // console.log(currentUser)
   // console.log(data)
@@ -53,7 +60,6 @@ export async function createEvent(data) {
     throw new Error("User not authenticated");
   }
 
-  tags.res=res;
 
   if (!channel || !name || !user_id || !icon  || !tags) {
     throw new Error("All fields are required");
