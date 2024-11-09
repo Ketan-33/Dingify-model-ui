@@ -115,7 +115,9 @@ export function AddChannelButton() {
                       Select
                     </option>
                     <option value="OpenAI">OpenAI</option>
-                    <option value="LLM">vLLM</option>
+                    <option value="vLLM">vLLM</option>
+                    <option value="Bedrock">Bedrock</option>
+                    <option value="Anthropic">Anthropic</option>
                   </select>
                 </div>
 
