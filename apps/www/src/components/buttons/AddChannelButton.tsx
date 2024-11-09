@@ -24,13 +24,21 @@ export function AddChannelButton() {
   const [providerType, setProviderType] = useState("");
   const [url, setUrl] = useState("");
   const [requestBody, setRequestBody] = useState("");
+  const [additionalField, setAdditionalField] = useState(""); // Additional field example
+  const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
 
+    // Move to the next step if there are more steps
+    if (step < 3) {
+      setStep(step + 1);
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const result = await createChannel(channelName, providerType, url, requestBody);
 
@@ -39,14 +47,18 @@ export function AddChannelButton() {
       }
 
       toast.success(`Channel "${channelName}" created successfully.`);
-
-      // Optionally, you can refresh the page or navigate to the new channel
       router.push(`/dashboard/channels/${result.channel?.id}`);
     } catch (error) {
       toast.error(error.message);
       console.error(error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleBack = () => {
+    if (step > 1) {
+      setStep(step - 1);
     }
   };
 
@@ -65,66 +77,78 @@ export function AddChannelButton() {
               Enter the details for the new provider.
             </DialogDescription>
           </DialogHeader>
+
           <div className="grid gap-4 pt-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="channelName" className="col-span-1 text-center">
-                Provider Name
-              </Label>
-              <Input
-                id="channelName"
-                name="channelName"
-                placeholder="Channel Name..."
-                className="col-span-3"
-                value={channelName}
-                onChange={(e) => setChannelName(e.target.value)}
-                required
-                disabled={isLoading}
-              />
-            </div>
+            {/* Step 1: Basic Information */}
+            {step === 1 && (
+              <>
+                <div className="grid grid-cols-1 items-center gap-2">
+                  <Label htmlFor="channelName" className="ml-1">
+                    Provider Name
+                  </Label>
+                  <Input
+                    id="channelName"
+                    name="channelName"
+                    placeholder="Channel Name..."
+                    className="col-span-3"
+                    value={channelName}
+                    onChange={(e) => setChannelName(e.target.value)}
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
 
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="providerType" className="col-span-1 text-center">
-                Provider Type
-              </Label>
-              <select
-                id="providerType"
-                name="providerType"
-                value={providerType}
-                onChange={(e) => setProviderType(e.target.value)}
-                className="block col-span-3 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-gray-500"
-              >
-                <option value="" disabled>
-                  Select
-                </option>
-                <option value="OpenAI">OpenAI</option>
-                <option value="LLM">vLLM</option>
-              </select>
-            </div>
+                <div className="grid grid-cols-1 gap-2">
+                  <Label htmlFor="providerType" className="ml-1">
+                    Provider Type
+                  </Label>
+                  <select
+                    id="providerType"
+                    name="providerType"
+                    value={providerType}
+                    onChange={(e) => setProviderType(e.target.value)}
+                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-gray-500"
+                    required
+                    disabled={isLoading}
+                  >
+                    <option value="" disabled>
+                      Select
+                    </option>
+                    <option value="OpenAI">OpenAI</option>
+                    <option value="LLM">vLLM</option>
+                  </select>
+                </div>
 
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="url" className="col-span-1 text-center">
-                URL
-              </Label>
-              <Input
-                id="url"
-                name="url"
-                placeholder="http://localhost:11434"
-                className="col-span-3"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                required
-                disabled={isLoading}
-              />
-            </div>
+                <div className="grid grid-cols-1 items-center gap-2 ">
+                  <Label htmlFor="url" className="ml-1">
+                    URL
+                  </Label>
+                  <Input
+                    id="url"
+                    name="url"
+                    placeholder="http://localhost:11434"
+                    className="col-span-3"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+              </>
+            )}
 
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="requestBody" className="col-span-1 text-center">
-                Request Body
-              </Label>
-              <Textarea
-                id="requestBody"
-                name="requestBody"
-                placeholder={`{
+
+            {/* Step 2: Request Body and Additional Field */}
+            {step === 2 && (
+              <>
+                <div className="grid grid-cols-1 items-center gap-2">
+                  <Label htmlFor="requestBody" className="ml-1">
+                    Request Body
+                  </Label>
+                  <Textarea
+                    id="requestBody"
+                    name="requestBody"
+                    placeholder={`{
   "model": "llama3.1",
   "messages": [
     {
@@ -132,23 +156,50 @@ export function AddChannelButton() {
       "content": "Your content here"
     }
   ]
-}`}
-                className="col-span-3"
-                value={requestBody}
-                onChange={(e) => setRequestBody(e.target.value)}
-                required
-                disabled={isLoading}
-              />
-
-            </div>
+}`
+                    }
+                    className="col-span-3 h-48"
+                    value={requestBody}
+                    onChange={(e) => setRequestBody(e.target.value)}
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="grid grid-cols-1 items-center gap-2">
+                  <Label htmlFor="additionalField" className="ml-1">
+                    Additional Field
+                  </Label>
+                  <Input
+                    id="additionalField"
+                    name="additionalField"
+                    placeholder="Additional info..."
+                    className="col-span-3"
+                    value={additionalField}
+                    onChange={(e) => setAdditionalField(e.target.value)}
+                    disabled={isLoading}
+                  />
+                </div>
+              </>
+            )}
           </div>
-          <DialogFooter>
+
+          <DialogFooter className="flex justify-between">
+            {step > 1 && (
+              <Button
+                type="button"
+                onClick={handleBack}
+                disabled={isLoading}
+                variant="secondary"
+              >
+                Back
+              </Button>
+            )}
             <Button
               type="submit"
               disabled={isLoading}
               className="w-full sm:w-auto"
             >
-              {isLoading ? "Saving..." : "Save new channel"}
+              {isLoading ? "Saving..." : step < 3 ? "Next" : "Save new Provider"}
             </Button>
           </DialogFooter>
         </form>
