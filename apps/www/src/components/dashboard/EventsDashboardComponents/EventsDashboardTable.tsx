@@ -146,7 +146,9 @@ export default function EventsDashboardTable({
                         </div>
                       </TableCell>
                       <TableCell className="hidden sm:table-cell">
-                        <div title={event.tags.reqRes ? JSON.stringify(event.tags.reqRes) : ''}>
+                        {
+                          event.tags.reqRes?
+                          <div title={event.tags.reqRes ? JSON.stringify(event.tags.reqRes) : ''}>
                           {event.tags.reqRes &&
                             event.tags.reqRes.res &&
                             event.tags.reqRes.res.choices &&
@@ -160,7 +162,9 @@ export default function EventsDashboardTable({
                             )
                             : 'N/A'
                           }
-                        </div>
+                        </div>:"N/A"
+                        }
+                        
 
                       </TableCell>
 

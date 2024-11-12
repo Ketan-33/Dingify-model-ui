@@ -99,10 +99,6 @@ const Page = () => {
         createEvent(eventData);
   
     }
- 
-
-
-
   };
 
 
