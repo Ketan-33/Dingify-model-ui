@@ -16,6 +16,7 @@ import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";
 import { LanguageForm2 } from "@/components/forms/language-form2";
 import { UserNameForm } from "@/components/forms/user-name-form";
+import SettingsAPI from "@/components/buttons/SettingsAPI";
 
 export const metadata = {
   title: "Dingify Settings - Customize Your Experience",
@@ -86,6 +87,11 @@ export default async function SettingsPage() {
       <div className="grid gap-10">
         <UserNameForm user={{ id: user.id, name: user.name || "" }} />
       </div>
+
+      <div className="grid gap-10">
+        <SettingsAPI />
+        </div>         
+      
     </DashboardShell>
   );
 }

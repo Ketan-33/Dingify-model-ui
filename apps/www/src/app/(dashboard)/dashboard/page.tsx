@@ -151,7 +151,7 @@ export default async function DashboardPage({isNoti}) {
             <EmptyPlaceholder.Description>
               You need to generate an API key first
             </EmptyPlaceholder.Description>
-            <AddApiKeyButton />
+            <AddApiKeyButton  />
             <div className="mt-4 space-y-4">
               <StartOnbordaButton />
 

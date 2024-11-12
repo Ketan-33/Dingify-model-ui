@@ -5,7 +5,7 @@ import { callOllama } from '@/actions/create-event';
 import { createEvent } from '@/actions/create-event';
 import { getUserChannels } from '@/actions/get-channels';
 
-
+import { toast } from "sonner";
 
 const Page = () => {
   const [inputValue, setInputValue] = useState('');
@@ -74,23 +74,35 @@ const Page = () => {
 
 
   const handleGenerate = async () => {
-    console.log('Input value:', inputValue);
-    console.log("Calling Ollama ");
 
-    eventData.tags.content = inputValue;
-    eventData.channel = selectedChannel;
-    setLoading(true);
+    if(providerType==""){
+      toast.error("Please select Provider.");
+    }
+    else{
+      console.log('Input value:', inputValue);
+      console.log("Calling Ollama ");
+  
+      eventData.tags.content = inputValue;
+      eventData.channel = selectedChannel;
+      setLoading(true);
+  
+  
+        const result = await callOllama(inputValue,url);
+        eventData.tags.reqRes =  JSON.stringify(result);
+        eventData.tags.url = url;
+        eventData.tags.providerType = providerType;
+        console.log("Generated response: ", result?.res);
+        setResValue(result?.res.choices[0].message.content);
+        setInputValue('');
+        setLoading(false);
+    
+        createEvent(eventData);
+  
+    }
+ 
 
-    const result = await callOllama(inputValue,url);
-    eventData.tags.reqRes =  JSON.stringify(result);
-    eventData.tags.url = url;
-    eventData.tags.providerType = providerType;
-    console.log("Generated response: ", result?.res);
-    setResValue(result?.res.choices[0].message.content);
-    setInputValue('');
-    setLoading(false);
 
-    createEvent(eventData);
+
   };
 
 
@@ -131,9 +143,9 @@ const Page = () => {
 
 
         <button
-          className='ml-2 bg-gray-900 hover:scale-95 transition-all duration-200 text-white p-2 rounded'
+          className='ml-2 bg-gray-900 hover:scale-95 transition-all duration-200 text-white p-2 rounded' 
           onClick={handleGenerate}
-          disabled={loading}
+          disabled={loading }
         >
           {loading ? 'Generating...' : 'Generate'}
         </button>

@@ -29,10 +29,10 @@ export async function generateAndSaveApiKey() {
     console.log(`API key saved successfully for user ID: ${userId}.`);
 
     // Create a new project and channel
-    const projectResponse = await createProjectAndChannel("Project1");
-    if (!projectResponse.success) {
-      throw new Error(projectResponse.error);
-    }
+    // const projectResponse = await createProjectAndChannel("Project1");
+    // if (!projectResponse.success) {
+    //   throw new Error(projectResponse.error);
+    // }
 
     console.log(
       `Project and channel created successfully for user ID: ${userId}.`,
@@ -44,8 +44,8 @@ export async function generateAndSaveApiKey() {
       success: true,
       user: updatedUser,
       apiKey,
-      project: projectResponse.project,
-      channel: projectResponse.channel,
+      // project: projectResponse.project,
+      // channel: projectResponse.channel,
     };
   } catch (error) {
     console.error(`Error saving API key for user ID: ${userId}`, error);

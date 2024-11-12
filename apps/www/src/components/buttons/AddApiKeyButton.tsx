@@ -46,7 +46,8 @@ export function AddApiKeyButton() {
     if (response.success) {
       setApiKey(response.apiKey as string);
       
-      toast.success("Your new API key has been generated successfully.");
+      toast.success("Your new API key has been generated successfully.\nPlease refresh the page to see the changes.");
+
     } else {
       console.error(response.error);
       toast.error("There was an error generating the API key.");

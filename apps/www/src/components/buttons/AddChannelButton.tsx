@@ -89,7 +89,7 @@ export function AddChannelButton() {
                   <Input
                     id="channelName"
                     name="channelName"
-                    placeholder="Channel Name..."
+                    placeholder="Provider Name..."
                     className="col-span-3"
                     value={channelName}
                     onChange={(e) => setChannelName(e.target.value)}
